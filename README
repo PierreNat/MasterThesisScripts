@@ -1,0 +1,61 @@
+Pierre Cuony
+pierre.cuony@gmail.com
+Python Script
+Master Thesis: 3D Pose Estimation of Minimally Invasive Robotic Instruments
+August 2019
+
+#-----------------------------------------------------------------------------------------------------------------------------
+
+Folder: training1image
+this folder contains 6 different scripts that train either the Render or Regression estimator to converge on 1 single image
+3d objects for the renderer are contained in the '3d_objects' and 'data' folder
+the folder 'Npydatabse' contains the image, parameters, and segmentation masks. (3 npy file for 1 image)
+new images can be created with the script 'CreationOfSynthetiImage.py'
+Result, plot and gif are located in the 'results' folder
+plots are saved in '.tex' format to be imported in a Latex documentation
+
+example:
+1_example5_resnet_1im_translation_Regression_3params.py
+=
+resnet50 has 3 parameters in ouput, regression for 1 image with only translation motion
+
+3_example5_resnet_1im_6params_Render_6params
+resnet50 has 6 parameters in ouput, regression for 1 image with translation and rotation motion
+
+#-----------------------------------------------------------------------------------------------------------------------------
+
+Folder: UbelixTraining
+to train run:
+CNN_resnet50TrainValRegressionV2
+or
+CNN_resnet50TrainValRenderV2
+
+
+This folder contains scripts that were uploaded on the ubelix server
+The scripts can train the Regression or the Renderer estimator with  dataset of 10000+ images
+CNN_resnet50TrainValRegressionV2.py -> training of the Regression estimator
+CNN_resnet50TrainValRenderV2.py -> training of the Render estimator
+CreationOfSyntheticImages -> for the creation of 10000 images database saved in the 'Npydatabse' folder
+all database are located in the 'Npydatabse' folder
+for each epoch of the training, the corresponding model is saved in the 'models' folder
+model can be recalled to test a specific model with new dataset of image (done for the testing of the estimator with the image sequence)
+
+image database will not be uploaded on Git cause there are 7GB of data
+Database for the Npydatabase file can be easily created with the CreationOfSyntheticImages.npy file
+'.sh' file are the Sbatch job to launch on Ubelix to start the training
+
+
+#-----------------------------------------------------------------------------------------------------------------------------
+
+Folder: testingEstimator
+to test run:
+CNN_resnet50TestRegressionModelV2 ()
+or 
+CNN_resnet50TestRenderModelV2
+
+
+this folder contains the script to test the Renderer or Regression model produced and saved on Ubelix
+There is one script to test the Renderer and one to test the Regression estimator
+'CreationOfSyntheticImages.py' create the time lapse database (1000 images)
+Each test script will take the time lapse database and estimate the pose for each image
+
